@@ -1,6 +1,24 @@
+<link rel="stylesheet" href="{{asset('css/footer.css')}}">
 <div class="footer-container">
     <div class="footer-section-01">
-        
+        <div class="footer-section-01-left">
+            BlogSphere
+        </div>
+        <div class="footer-section-01-right">
+            <div>
+                Subscribe our newsletter for latest blogs, new features and so on. Let's stay updated!
+            </div>
+            <div class="newsletter">
+                <form action="" class="newsletter-form">
+                    <div>
+                        <input type="email" name="newsletter_emal" id="newsletter_email" placeholder="Email..."/>
+                    </div>
+                    <div>
+                        <input type="submit" value="Subscribe" id="newsletter_submit"/>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
     <div class="footer-section-02">
         <div class="footer-section-02-left">
@@ -11,7 +29,7 @@
                 Home
             </div>
             <div>
-                Blog
+                Blogs
             </div>
             <div>
                 About us
