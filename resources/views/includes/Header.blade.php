@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{{asset('css/header.css')}}">
+
 <div class="header-container">
     <div class="header-section-01">
         BlogSphere
@@ -7,7 +9,7 @@
             Home
         </div>
         <div>
-            Blog
+            Blogs
         </div>
         <div>
             About us
@@ -21,7 +23,9 @@
             Login
         </div>
         <div class="header-register-button">
-            Register
+            <a href="{{url('/register')}}">
+                Register
+            </a>
         </div>
     </div>
 </div>

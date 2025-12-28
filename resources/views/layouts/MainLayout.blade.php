@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>BlogSphere</title>
     <link rel="icon" href="{{asset('images/Favicon.jpg')}}"/>
-    <link rel="stylesheet" href="{{asset('css/main.css')}}"/>
     <style>
         body{
             background-color: #F5F1EE;
@@ -17,10 +16,6 @@
     </style>
 </head>
 <body>
-    @include('includes.Header')
-
     @yield('content')
-
-    @include('includes.Footer')
 </body>
 </html>
