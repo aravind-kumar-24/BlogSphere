@@ -1,3 +1,48 @@
 .registration-container{
-    
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.registration-form{
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+    padding: 50px;
+}
+
+.top-section{
+    display: flex;
+    flex-direction: column;
+}
+
+.top-section-top{
+    display: flex;
+    gap: 50px;
+}
+
+.top-section-left, .top-section-right{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.top-section-left > div, .top-section-right div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.gender_input{
+    display: flex;
+}
+
+.gender_inputs{
+    display: flex;
+    gap: 15px;
+}
+
+.gender_inputs div{
+    display: flex;
+    gap: 5px;
 }
