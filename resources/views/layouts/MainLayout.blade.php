@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>BlogSphere</title>
     <link rel="icon" href="{{asset('images/Favicon.jpg')}}"/>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <style>
         body{
             background-color: #F5F1EE;
