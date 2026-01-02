@@ -3,7 +3,8 @@
 @section('content')
     <link rel="stylesheet" href="{{asset('css/registration.css')}}">
     <div class="registration-container">
-        <form class="registration-form" method="POST">
+        <form class="registration-form" method="POST" enctype="multipart/form-data" action="{{url('register')}}">
+            @csrf
             <div class="top-section">
                 <div class="top-section-01">
                     <div>
@@ -49,9 +50,9 @@
                         <label for="city">City</label>
                         <select name="city" id="city">
                             <option value="" disabled selected>Select a City</option>
-                            @foreach($cities as $city)
+                            {{-- @foreach($cities as $city)
                                 <option value="{{$city->id}}">{{$city->city_name}}</option>
-                            @endforeach
+                            @endforeach --}}
                         </select>
                     </div>
                 </div>
