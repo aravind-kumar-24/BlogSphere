@@ -23,7 +23,7 @@
             Login
         </div>
         <div class="header-register-button">
-            <a href="{{url('/register')}}">
+            <a href="{{url('/user-register')}}">
                 Register
             </a>
         </div>
