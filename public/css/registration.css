@@ -30,7 +30,7 @@
     gap: 40px;
 }
 
-.top-section-01 div, .top-section-02 div, .top-section-03 div, .top-section-06 div, .top-section-07 div, .top-section-08 div{
+.top-section-01 div, .top-section-02 div, .top-section-03 div, .top-section-06 div, .top-section-07 div{
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -43,7 +43,7 @@
     color: #C97C5D;
 }
 
-.top-section-01 input, .top-section-02 input, .top-section-03 input, .top-section-08 input{
+.top-section-01 input, .top-section-02 input, .top-section-03 input{
     height: 30px;
     padding-left: 10px;
     border-radius: 5px;
@@ -196,3 +196,41 @@ input[type="radio"] {
     cursor: pointer;
 }
 
+.error{
+    color: red; 
+    font-size: 12px;
+    margin-top: 4px;
+    display: block;
+}
+
+.password_field, .confirm_password_field{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.password_input, .confirm_password_input{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #C97C5D;
+    border-radius: 5px;
+    padding-right: 10px;
+    background: white;
+}
+
+.top-section-08 input{
+    padding-left: 10px;
+    width: 100%;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    color: #4A4A4A;
+}
+
+.password_input svg, .confirm_password_input svg{
+    cursor: pointer;
+}

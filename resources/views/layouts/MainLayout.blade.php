@@ -7,6 +7,7 @@
     <title>BlogSphere</title>
     <link rel="icon" href="{{asset('images/Favicon.jpg')}}"/>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <style>
         body{
             background-color: #F5F1EE;
@@ -17,6 +18,8 @@
     </style>
 </head>
 <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <div id="loader" class="loader" style="display:none;"></div>
     @yield('content')
 </body>
 </html>
