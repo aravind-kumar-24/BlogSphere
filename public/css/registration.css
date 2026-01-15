@@ -191,9 +191,10 @@ input[type="radio"] {
     text-align: center;
 }
 
-.bottom-section-02 span{
+.bottom-section-02 span a{
     color: #C97C5D;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .error{

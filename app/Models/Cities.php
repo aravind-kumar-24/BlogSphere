@@ -12,4 +12,12 @@ class Cities extends Model
     protected $table = 'cities';
 
     protected $guarded = [];
+
+    public function states(){
+        return $this->belongsTo(States::class);
+    }
+
+    public function bloggers(){
+        return $this->hasMany(Bloggers::class);
+    }
 }

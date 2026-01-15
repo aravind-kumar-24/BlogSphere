@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
+use App\Models\Bloggers;
 use App\Models\Cities;
 use App\Services\AssetsService;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -21,6 +26,57 @@ class RegisterController extends Controller
     }
 
     public function register(RegisterRequest $request){
-        return $request->all();
+        try{
+            $data = $request->all();
+
+            $user_id = 'BLOG'.strtoupper(substr(Str::uuid()->toString(), 0, 8));
+
+            if($request->hasFile('profile_pic')){
+                $profile_picture = $request->file('profile_pic');
+                $profile_picture_file_name = time().'_'.uniqid().'.'.$profile_picture->extension();
+
+                $directory = public_path('profile_images');
+
+                if(!is_dir($directory)){
+                    mkdir($directory, 0755, true);
+                }
+
+                $profile_picture->move($directory, $profile_picture_file_name);
+                $profile_picture_file_path = 'profile_images/'.$profile_picture_file_name;
+            };
+
+            $hashed_password = Hash::make($request->input('password'));
+
+            $blogger = new Bloggers();
+            $blogger->user_id = $user_id;
+            $blogger->first_name = $data['first_name'];
+            $blogger->last_name = $data['last_name'];
+            $blogger->user_name = $data['user_name'];
+            $blogger->profession = $data['profession'];
+            $blogger->email_id = $data['email_id'];
+            $blogger->contact_number = $data['contact_number'];
+            $blogger->state_id = $data['state'];
+            $blogger->city_id = $data['city'];
+            $blogger->gender = $data['gender'];
+            $blogger->date_of_birth = $data['date_of_birth'];
+            $blogger->address = $data['address'];
+            $blogger->status = 'inactive';
+            $blogger->profile_pic = $profile_picture_file_path;
+            $blogger->password = $hashed_password;
+            $blogger->save();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Registration completed successfully!',
+                'redirect_url' => url('/blogger-login')
+            ]);
+
+        }catch(\Exception $e){
+            return Response::json([
+                'status' => false,
+                'message' => 'Something went wrong',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 }
