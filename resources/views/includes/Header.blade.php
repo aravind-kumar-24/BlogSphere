@@ -23,7 +23,7 @@
             Login
         </div>
         <div class="header-register-button">
-            <a href="{{url('/user-register')}}">
+            <a href="{{url('/blogger-register')}}">
                 Register
             </a>
         </div>

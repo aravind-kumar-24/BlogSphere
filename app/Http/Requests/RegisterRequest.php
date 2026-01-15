@@ -18,10 +18,10 @@ class RegisterRequest extends FormRequest
         return [
             'first_name' => 'required|string|max:50',
             'last_name' => 'required|string|max:50',
-            'user_name' => 'required|string|max:50',
+            'user_name' => 'required|string|max:50|unique:bloggers,user_name',
             'profession' => 'required|string|max:50',
-            'email_id' => 'required|email|max:100',
-            'contact_number'=> 'required|string|max:10',
+            'email_id' => 'required|email|max:100|unique:bloggers,email_id',
+            'contact_number'=> 'required|string|max:10|unique:bloggers,contact_number',
             'state' => 'required',
             'city' => 'required',
             'gender' => 'required|in:Male,Female,Others',
@@ -31,9 +31,9 @@ class RegisterRequest extends FormRequest
             'password' => [
                 'required',
                 'confirmed',
-                Password::min(10)->mixedCase()->numbers()->symbols()
+                Password::min(10)->max(15)->mixedCase()->numbers()->symbols()
             ],
-            'password_confirmation'=> 'required|min:10',
+            'password_confirmation'=> 'required|min:10|max:15',
             'terms_and_conditions' => 'required'
         ];
     }
@@ -46,13 +46,16 @@ class RegisterRequest extends FormRequest
             'last_name.required' => 'Last Name is required',
             
             'user_name.required' => 'User Name is required',
+            'user_name.unique' => 'User Name already exists',
             
             'profession.required' => 'Profession is required',
 
             'email_id.required' => 'Email ID is required',
             'email_id.email' => 'Please enter a valid Email Address',
+            'email_id.unique' => 'Email ID already exists',
 
             'contact_number.required' => 'Contact Number is required',
+            'contact_number.unique' => 'Contact Number already exists',
             'contact_number.max' => 'Contact Number must not be greater than 10 characters',
             
             'state.required' => 'Please select a State',
