@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User;
 
-class Bloggers extends Model
+class Bloggers extends User
 {
     protected $table = 'bloggers';
 

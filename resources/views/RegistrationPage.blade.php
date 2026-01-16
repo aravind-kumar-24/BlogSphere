@@ -3,7 +3,7 @@
 @section('content')
     <link rel="stylesheet" href="{{asset('css/registration.css')}}">
     <div class="registration-container">
-        <form class="registration-form" method="POST" enctype="multipart/form-data" action="{{url('register')}}">
+        <form class="registration-form" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="top-section">
                 <div class="top-section-01">
@@ -173,9 +173,9 @@
                             }, 1000);
                         }
                     },
-                    error: function(xhr){
-                        if(xhr.status === 422){
-                            let errors = xhr.responseJSON.errors;
+                    error: function(error){
+                        if(error.status === 422){
+                            let errors = error.responseJSON.errors;
 
                             $('.error').text('');
 
@@ -194,8 +194,8 @@
                             }
                         }  else {
                             let errMsg = 'Something went wrong';
-                            if(xhr.responseJSON && xhr.responseJSON.message){
-                                errMsg = xhr.responseJSON.message;
+                            if(error.responseJSON && error.responseJSON.message){
+                                errMsg = error.responseJSON.message;
                             }
                             toastr.error(errMsg);
                         }
