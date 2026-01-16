@@ -19,8 +19,10 @@
         </div>
     </div>
     <div class="header-section-03">
-        <div>
-            Login
+        <div class="header-login-button">
+            <a href="{{url('/blogger-login')}}">
+                Login
+            </a>
         </div>
         <div class="header-register-button">
             <a href="{{url('/blogger-register')}}">
