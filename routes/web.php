@@ -20,3 +20,6 @@ Route::middleware('is_authenticated')->group(function(){
     });
 });
 
+Route::get('/temp', function(){
+    return view('email_templates.RegistrationCompleted');
+});

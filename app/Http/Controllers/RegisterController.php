@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
+use App\Mail\RegistrationCompletedMail;
 use App\Models\Bloggers;
 use App\Models\Cities;
 use App\Services\AssetsService;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Str;
 
@@ -64,6 +67,17 @@ class RegisterController extends Controller
             $blogger->profile_pic = $profile_picture_file_path;
             $blogger->password = $hashed_password;
             $blogger->save();
+
+            $full_name = $blogger->first_name.' '.$blogger->last_name;
+
+            //Only for testing
+            $blogger->email_id = 'aravindmpkas@gmail.com';
+
+            try{
+                Mail::to($blogger->email_id)->send(new RegistrationCompletedMail($full_name));
+            }catch(\Exception $e){
+                Log::error("Failed to send registration completed mail: " . $e->getMessage());
+            }
 
             return response()->json([
                 'status' => true,
