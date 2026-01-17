@@ -9,12 +9,16 @@ use App\Models\Bloggers;
 use App\Models\Cities;
 use App\Services\AssetsService;
 use Exception;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Str;
+
+use function Symfony\Component\Clock\now;
 
 class RegisterController extends Controller
 {
@@ -58,6 +62,7 @@ class RegisterController extends Controller
             $blogger->profession = $data['profession'];
             $blogger->email_id = $data['email_id'];
             $blogger->contact_number = $data['contact_number'];
+            $blogger->contact_verified_at = now();
             $blogger->state_id = $data['state'];
             $blogger->city_id = $data['city'];
             $blogger->gender = $data['gender'];
@@ -69,12 +74,14 @@ class RegisterController extends Controller
             $blogger->save();
 
             $full_name = $blogger->first_name.' '.$blogger->last_name;
+            $encrypted_user_id = Crypt::encryptString($blogger->user_id);
+            $url = url('email-verification/'.$encrypted_user_id);
 
             //Only for testing
             $blogger->email_id = 'aravindmpkas@gmail.com';
 
             try{
-                Mail::to($blogger->email_id)->send(new RegistrationCompletedMail($full_name));
+                Mail::to($blogger->email_id)->send(new RegistrationCompletedMail($full_name, $url));
             }catch(\Exception $e){
                 Log::error("Failed to send registration completed mail: " . $e->getMessage());
             }
@@ -91,6 +98,33 @@ class RegisterController extends Controller
                 'message' => 'Something went wrong',
                 'error' => $e->getMessage(),
             ], 500);
+        }
+    }
+
+    public function email_verification($user_id){
+
+        try{
+            $decrypted_user_id = Crypt::decryptString($user_id);
+
+            $blogger = Bloggers::where('user_id', $decrypted_user_id)->first();
+
+            if(!$blogger){
+                abort(404);
+            }
+
+            if($blogger->email_verified_at !== null){
+                return view('email_templates.EmailAlreadyVerified');
+            }
+
+            $blogger->email_verified_at = now();
+            $blogger->status = 'active';
+            $blogger->save();
+
+            return view('email_templates.EmailVerificationCompleted');
+        }catch(DecryptException $e){
+            abort(404);
+        }catch(\Exception $e){
+            abort(500);
         }
     }
 }

@@ -13,6 +13,7 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/get-cities/{state_id}', [RegisterController::class, 'get_cities']);
 Route::get('/blogger-login', [LoginController::class, 'index']);
 Route::post('/login', [LoginController::class, 'login']);
+Route::get('/email-verification/{user_id}', [RegisterController::class, 'email_verification']);
 
 Route::middleware('is_authenticated')->group(function(){
     Route::prefix('blogsphere')->group(function(){

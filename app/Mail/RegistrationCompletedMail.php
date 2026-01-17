@@ -14,10 +14,12 @@ class RegistrationCompletedMail extends Mailable
     use Queueable, SerializesModels;
 
     public $blogger_name;
+    public $verification_url;
 
-    public function __construct($name)
+    public function __construct($name, $url)
     {
         $this->blogger_name = $name;
+        $this->verification_url = $url;
     }
 
     public function envelope(): Envelope
