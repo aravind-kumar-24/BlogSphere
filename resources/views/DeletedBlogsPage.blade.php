@@ -8,19 +8,19 @@
     use Illuminate\Support\Str;
 @endphp
 
-<link rel="stylesheet" href="{{asset('css/all_blogs.css')}}">
+<link rel="stylesheet" href="{{asset('css/deleted_blogs.css')}}">
 
-<div class="all-blogs-container">
+<div class="deleted-blogs-container">
     <div class="page-title">
-        Blogs Feed
+        Deleted Blogs
     </div>
-    @if ($all_blogs->count() == 0)
+    @if ($deleted_blogs->count() == 0)
         <div class="no-record">
-            No Blogs Found
+            No Blogs Deleted
         </div>
     @else
-        <div class="all_blogs">
-            @foreach ($all_blogs as $blogs)
+        <div class="deleted">
+            @foreach ($deleted_blogs as $blogs)
                 <div class="blog">
                     <img class="blog-image" src="{{asset($blogs->blog_image)}}" alt="">
                     <div class="blog-content">
@@ -38,7 +38,7 @@
             @endforeach
         </div>
         <div class="pagination-container">
-            {{ $all_blogs->links('pagination::bootstrap-4') }}
+            {{ $deleted_blogs->links('pagination::bootstrap-4') }}
         </div>
     @endif
 </div>

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\BlogCategories;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -22,7 +23,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             StatesSeeder::class,
-            CitiesSeeder::class
+            CitiesSeeder::class,
+            BlogCategoriesSeeder::class
         ]);
     }
 }
