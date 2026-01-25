@@ -17,4 +17,8 @@ class Bloggers extends User
     public function cities(){
         return $this->belongsTo(Cities::class);
     }
+
+    public function blogs(){
+        return $this->hasMany(Blogs::class);
+    }
 }
