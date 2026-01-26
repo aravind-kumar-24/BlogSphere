@@ -1,0 +1,248 @@
+.profile-page{
+    display: flex;
+    align-items: center;
+    margin: 80px 0 100px 0;
+}
+
+.profile-container{
+    border: 1px solid #C97C5D;
+    width: 50%;
+    padding:50px 40px 50px 40px;
+    border-radius: 15px;
+    margin: auto;
+}
+
+.profile-update-form{
+    width: 100%;
+}
+
+.module-title{
+    font-size: 30px;
+    text-align: center;
+    color: #C97C5D;
+    font-weight: 600;
+    padding-bottom: 30px;
+}
+
+.top-section{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.top-section-01, .top-section-02, .top-section-03, .top-section-05, .top-section-06{
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.top-section-01 div, .top-section-02 div, .top-section-03 div, .top-section-06 div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.top-section-01 label, .top-section-02 label, .top-section-03 label, .top-section-04 label, .top-section-05 label, .top-section-06 label{
+    font-size:15px;
+    font-weight: 600;
+    color: #C97C5D;
+}
+
+.top-section-01 input, .top-section-02 input, .top-section-03 input{
+    height: 30px;
+    padding-left: 10px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid #C97C5D;
+    color: #4A4A4A;
+}
+
+.top-section-04{
+    display: flex;
+    width: 100%;
+    gap: 40px;
+}
+
+.top-section-04 div{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+}
+
+.top-section-04 select{
+    height: 30px;
+    outline: none;
+    border: 1px solid #C97C5D;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+.top-section-05 .date_of_birth_input{
+    width: 100%;
+}
+
+#state option{
+    color: #4A4A4A;
+}
+
+.gender_input{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.gender_inputs{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.gender_inputs div{
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.gender_inputs label{
+    color: #4A4A4A;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    accent-color: #C97C5D;
+}
+
+.date_of_birth_input{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.date_of_birth_input input{
+    height: 30px;
+    padding-left: 10px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid #C97C5D;
+    color: #4A4A4A;
+}
+
+.top-section-06 textarea{
+    max-width: 98%;
+    min-width: 98%;
+    max-height: 30px;
+    padding: 8px 0 8px 12px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid #C97C5D;
+    min-height: 35px;
+    color: #4A4A4A;;
+}
+
+.top-section-07 div{
+    width: 100%;
+    display: flex;
+    margin-top: -5px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+    gap: 15px;
+}
+
+.top-section-07 label{
+    font-size:15px;
+    font-weight: 600;
+    color: #C97C5D;
+}
+
+.top-section-07 input{
+    width: 100%;
+    height: 24px;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid #C97C5D;
+}
+
+.bottom-section{
+    margin-top: 50px;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+
+.bottom-section-01{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+#update_button, #edit_button{
+    background-color: #C97C5D;
+    border-radius: 10px;
+    height: 30px;
+    width: 100px;
+    border: none;
+    color: #F5F1EE;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#update_cancel_button{
+    background-color: #F5F1EE;
+    border: 2px solid #C97C5D;
+    border-radius: 10px;
+    height: 30px;
+    width: 100px;
+    color: #C97C5D;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.error{
+    color: red; 
+    font-size: 12px;
+    margin-top: 4px;
+    display: block;
+}
+
+.profile-image-preview{
+    display: flex;
+    justify-content: center;
+}
+
+.profile-image{
+    border-radius: 5px;
+    border: 1px solid #C97C5D;
+    width: 120px;
+    padding: 10px;
+}
+
+input:disabled,
+textarea:disabled,
+select:disabled {
+    background-color: #F7F3F1;   
+    border-color: #C97C5D;      
+    color: #4A4A4A;              
+    cursor: not-allowed;
+}
+
+input[type="radio"]:disabled,
+input[type="checkbox"]:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+input[type="file"]:disabled {
+    background-color: #F7F3F1;
+    cursor: not-allowed;
+}
+
+select:disabled {
+    background-image: none;
+}
