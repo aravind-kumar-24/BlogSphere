@@ -11,4 +11,9 @@ class AssetsService
         $states = States::where('status','active')->whereNull('deleted_at')->get();
         return $states;
     }
+
+    public static function cities(){
+        $cities = Cities::where('status','active')->whereNull('deleted_at')->get();
+        return $cities;
+    }
 }

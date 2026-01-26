@@ -82,4 +82,24 @@ class LoginController extends Controller
             ],500);
         }
     }
+
+    public function logout(){
+        try{
+
+            Auth::logout();
+
+            return Response::json([
+                'status' => true,
+                'message' => 'Blogger logged out successfully!',
+                'redirect_url' => url('/blogger-login')
+            ],200);
+
+        }catch(Exception $e){
+            return Response::json([
+                'status' => false,
+                'message' => 'Something went wrong',
+                'error' => $e->getMessage()
+            ],500);
+        }
+    }
 }

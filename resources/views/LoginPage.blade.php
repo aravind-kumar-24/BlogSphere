@@ -25,7 +25,14 @@
                     <input id="submit_button" type="submit" value="Login"/>
                 </div>
                 <div class="bottom-section-02">
-                    Don't have an account? <span><a href="{{url('blogger-register')}}">Sign up...</a></span>
+                    <div>
+                        <a class="forgot-password" href="{{url('forgot-password')}}">
+                            Forgot Password?
+                        </a>
+                    </div>
+                    <div>
+                        Don't have an account? <span><a href="{{url('blogger-register')}}">Sign up...</a></span>
+                    </div>
                 </div>
             </div>
         </form>
