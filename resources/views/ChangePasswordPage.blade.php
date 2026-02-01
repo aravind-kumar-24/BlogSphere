@@ -53,6 +53,8 @@
 
                 let formData = new FormData(this);
 
+                $('#loader').addClass('active');
+
                 $.ajax({
                     url:"{{url('/blogsphere/update-password')}}",
                     type:"POST",
@@ -67,6 +69,8 @@
 
                             $('.error').text('');
 
+                            $('#loader').removeClass('active');
+
                             setTimeout(function(){
                                 window.location.href = response.redirect_url;
                             }, 1000);
@@ -74,6 +78,8 @@
                     },
                     error:function(error){
                         if(error.status === 422){
+                            $('#loader').removeClass('active');
+                            
                             let errors = error.responseJSON.errors;
 
                             console.log(errors);

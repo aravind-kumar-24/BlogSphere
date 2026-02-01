@@ -89,12 +89,12 @@
     display: block;
 }
 
-.published-blogs, .my-profile{
+.published-blogs, .my-profile, .manage-blogs{
     border-top: 1px solid #C97C5D;
     border-bottom: 1px solid #C97C5D;
 }
 
-.all-blogs{
+.all-blogs, .manage-bloggers{
     border-top: 1px solid #C97C5D;
 }
 

@@ -5,18 +5,17 @@
         BlogSphere
     </div>
     <div class="header-section-02">
-        <div>
-            Home
-        </div>
-        <div>
-            Blogs
-        </div>
-        <div>
-            About us
-        </div>
-        <div>
-            Contact
-        </div>
+        @if (auth()->user()->user_type == '2')
+            <div>
+                Home
+            </div>
+            <div>
+                About us
+            </div>
+            <div>
+                Contact
+            </div>
+        @endif
     </div>
     <div class="header-section-03">
         @guest
@@ -42,10 +41,17 @@
 
                 <div class="header-dropdown-menu">
                     <ul>
-                        <li><a href="{{url('/blogsphere/create-blog/create')}}">Create Blog</a></li>
-                        <li class="all-blogs"><a href="{{url('/blogsphere/blogs')}}">All Blogs</a></li>
-                        <li class="published-blogs"><a href="{{url('/blogsphere/published-blogs')}}">Published Blogs</a></li>
-                        <li><a href="{{url('/blogsphere/deleted-blogs')}}">Deleted Blogs</a></li>
+                        @if (auth()->user()->user_type == '2')
+                            <li><a href="{{url('/blogsphere/create-blog/create')}}">Create Blog</a></li>
+                            <li class="all-blogs"><a href="{{url('/blogsphere/blogs')}}">All Blogs</a></li>
+                            <li class="published-blogs"><a href="{{url('/blogsphere/published-blogs')}}">Published Blogs</a></li>
+                            <li><a href="{{url('/blogsphere/deleted-blogs')}}">Deleted Blogs</a></li>
+                        @else
+                            <li><a href="{{url('/blogsphere/blogs')}}">All Blogs</a></li>
+                            <li class="manage-bloggers"><a href="{{url('/blogsphere/manage-bloggers')}}">Manage Bloggers</a></li>
+                            <li class="manage-blogs"><a href="{{url('/blogsphere/manage-blogs')}}">Manage Blogs</a></li>
+                            <li><a href="{{url('/blogsphere/rejected-blogs')}}">Rejected Blogs</a></li>
+                        @endif
                         <li class="my-profile"><a href="{{url('/blogsphere/my-profile/view')}}">My Profile</a></li>
                         <li class="change-password"><a href="{{url('/blogsphere/change-password')}}">Change Password</a></li>
                         <li><a class="logout" href="#">Logout</a></li>
@@ -73,6 +79,7 @@
 
         $('.logout').on('click', function(e){
             e.preventDefault();
+            $('#loader').addClass('active');
             $.ajax({
                 url:"{{url('blogsphere/logout')}}",
                 type:"GET",
@@ -82,10 +89,12 @@
                 success: function(response){
                     if(response.status){
                         toastr.success(response.message);
+                        $('#loader').removeClass('active');
                         window.location.href = response.redirect_url;
                     }
                 },
                 error: function(error){
+                    $('#loader').removeClass('active');
                     let errMsg = 'Something went wrong';
                     if(error.responseJSON && error.responseJSON.message){
                         errMsg = error.responseJSON.message;

@@ -12,9 +12,11 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
-            'is_authenticated' => App\Http\Middleware\AuthMiddleware::class
+            'is_authenticated' => App\Http\Middleware\AuthMiddleware::class,
+            'is_blogger' => App\Http\Middleware\BloggerMiddleware::class,
+            'is_admin' => App\Http\Middleware\AdminMiddleware::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
+        
     })->create();

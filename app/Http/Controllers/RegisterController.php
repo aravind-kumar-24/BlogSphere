@@ -60,6 +60,7 @@ class RegisterController extends Controller
             $blogger->last_name = $data['last_name'];
             $blogger->user_name = $data['user_name'];
             $blogger->profession = $data['profession'];
+            $blogger->user_type = '2';
             $blogger->email_id = $data['email_id'];
             $blogger->contact_number = $data['contact_number'];
             $blogger->contact_verified_at = now();
