@@ -19,6 +19,9 @@
     </style>
 </head>
 <body>
+    <div id="loader">
+        <div class="spinner" ></div>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <div id="loader" class="loader" style="display:none;"></div>

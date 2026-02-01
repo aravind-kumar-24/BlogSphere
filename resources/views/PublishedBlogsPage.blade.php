@@ -67,6 +67,9 @@
                 confirmButtonText: 'Yes'
             }).then((result)=>{
                 if(result.isConfirmed){
+
+                    $('#loader').addClass('active');
+
                     $.ajax({
                         url: "{{url('blogsphere/published-blogs/delete')}}/" + blog_id,
                         type: 'GET',
@@ -76,10 +79,13 @@
                             if(response.status == true){
                                 toastr.success(response.message);
 
+                                $('#loader').removeClass('active');
+
                                 location.reload();
                             }
                         },
                         error:function(error){
+                            $('#loader').removeClass('active');
                             let errMsg = 'Something went wrong';
                             if(error.responseJSON && error.responseJSON.message){
                                 errMsg = error.responseJSON.message;

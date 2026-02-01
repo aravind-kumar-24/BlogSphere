@@ -46,6 +46,8 @@
 
                 let formData = new FormData(this);
 
+                $('#loader').addClass('active');
+
                 $.ajax({
                     url:"{{url('login')}}",
                     type:"POST",
@@ -60,12 +62,15 @@
 
                             $('.error').text('');
 
+                            $('#loader').removeClass('active');
+
                             setTimeout(function(){
                                 window.location.href = response.redirect_url;
                             }, 1000);
                         }
                     },
                     error:function(error){
+                        $('#loader').removeClass('active');
                         if(error.status === 422){
                             let errors = error.responseJSON.errors;
 

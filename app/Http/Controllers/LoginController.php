@@ -25,6 +25,8 @@ class LoginController extends Controller
 
             $blogger = Bloggers::where('email_id', $email_id)->first();
 
+            $user_type = $blogger->user_type;
+
             if(!$blogger){
                 return Response::json([
                     'status' => false,
@@ -60,11 +62,13 @@ class LoginController extends Controller
                 ],401);
             }
 
+            $message = $user_type == '2' ? 'Blogger' : 'Admin';
+
             if(Auth::attempt(['email_id' => $email_id, 'password' => $password ])){
                 $request->session()->regenerate();
                 return Response::json([
                     'status' => true,
-                    'message' => 'Blogger successfully logged in!',
+                    'message' => $message. ' successfully logged in!',
                     'redirect_url' => url('/blogsphere/blogs')
                 ],200);
             }else{
@@ -86,11 +90,17 @@ class LoginController extends Controller
     public function logout(){
         try{
 
+            $user = Auth::user();
+
+            $user_type = $user->user_type;
+
             Auth::logout();
+
+            $message = $user_type == '2' ? 'Blogger' : 'Admin';
 
             return Response::json([
                 'status' => true,
-                'message' => 'Blogger logged out successfully!',
+                'message' => $message.' logged out successfully!',
                 'redirect_url' => url('/blogger-login')
             ],200);
 
@@ -101,5 +111,9 @@ class LoginController extends Controller
                 'error' => $e->getMessage()
             ],500);
         }
+    }
+
+    public function un_authenticated_access(){
+        return view('UnAuthenticated');
     }
 }

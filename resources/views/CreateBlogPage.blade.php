@@ -90,6 +90,8 @@
             
             let formData = new FormData(this);
 
+            $('#loader').addClass('active');
+
             let url = isUpdate 
                 ? "{{url('blogsphere/published-blogs/update')}}/{{$blog_id}}"
                 : "{{url('blogsphere/publish-blog')}}";
@@ -112,12 +114,15 @@
 
                         $('.error').text('');
 
+                        $('#loader').removeClass('active');
+
                         setTimeout(function(){
                             window.location.href = response.redirect_url;
                         }, 1000);
                     }
                 },
                 error: function(error){
+                    $('#loader').removeClass('active');
                     console.log(error);
                     if(error.status === 422){
 

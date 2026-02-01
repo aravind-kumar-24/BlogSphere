@@ -63,11 +63,15 @@ $(document).ready(function(){
     }
 
     function load_cities(state_id, selected_city = null) {
+        $('#loader').addClass('active');
+
         $.ajax({
             url: '/get-cities/' + state_id,
             type: 'GET',
             dataType: 'json',
             success: function (response) {
+
+                $('#loader').removeClass('active');
 
                 $('#city').empty();
 
@@ -93,6 +97,7 @@ $(document).ready(function(){
                 }
             },
             error: function () {
+                $('#loader').removeClass('active');
                 toastr.error('Error fetching the cities');
             }
         });
