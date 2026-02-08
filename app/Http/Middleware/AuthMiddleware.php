@@ -12,7 +12,7 @@ class AuthMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if(!Auth::check()){
-            return redirect('blogger-login');
+            return redirect('/');
         }
         return $next($request);
     }

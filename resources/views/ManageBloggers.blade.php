@@ -85,7 +85,7 @@
                                     {{$blogger->gender}}
                                 </td>
                                 <td>
-                                    <svg class="address_book" xmlns="http://www.w3.org/2000/svg" width="27" height="24" viewBox="0 0 576 512"><path fill="#C97C5D" d="M528 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h480c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48m-352 96c35.3 0 64 28.7 64 64s-28.7 64-64 64s-64-28.7-64-64s28.7-64 64-64m112 236.8c0 10.6-10 19.2-22.4 19.2H86.4C74 384 64 375.4 64 364.8v-19.2c0-31.8 30.1-57.6 67.2-57.6h5c12.3 5.1 25.7 8 39.8 8s27.6-2.9 39.8-8h5c37.1 0 67.2 25.8 67.2 57.6zM512 312c0 4.4-3.6 8-8 8H360c-4.4 0-8-3.6-8-8v-16c0-4.4 3.6-8 8-8h144c4.4 0 8 3.6 8 8zm0-64c0 4.4-3.6 8-8 8H360c-4.4 0-8-3.6-8-8v-16c0-4.4 3.6-8 8-8h144c4.4 0 8 3.6 8 8zm0-64c0 4.4-3.6 8-8 8H360c-4.4 0-8-3.6-8-8v-16c0-4.4 3.6-8 8-8h144c4.4 0 8 3.6 8 8z"/></svg>
+                                    <svg data-blogger="{{$blogger}}" class="address_book" xmlns="http://www.w3.org/2000/svg" width="27" height="24" viewBox="0 0 576 512"><path fill="#C97C5D" d="M528 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h480c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48m-352 96c35.3 0 64 28.7 64 64s-28.7 64-64 64s-64-28.7-64-64s28.7-64 64-64m112 236.8c0 10.6-10 19.2-22.4 19.2H86.4C74 384 64 375.4 64 364.8v-19.2c0-31.8 30.1-57.6 67.2-57.6h5c12.3 5.1 25.7 8 39.8 8s27.6-2.9 39.8-8h5c37.1 0 67.2 25.8 67.2 57.6zM512 312c0 4.4-3.6 8-8 8H360c-4.4 0-8-3.6-8-8v-16c0-4.4 3.6-8 8-8h144c4.4 0 8 3.6 8 8zm0-64c0 4.4-3.6 8-8 8H360c-4.4 0-8-3.6-8-8v-16c0-4.4 3.6-8 8-8h144c4.4 0 8 3.6 8 8zm0-64c0 4.4-3.6 8-8 8H360c-4.4 0-8-3.6-8-8v-16c0-4.4 3.6-8 8-8h144c4.4 0 8 3.6 8 8z"/></svg>
                                 </td>
                                 <td>
                                     @if ($blogger->status != 'rejected' && $blogger->deleted_at == null)
@@ -116,107 +116,123 @@
     @endif
 </div>
 <script>
-$(document).ready(function(){
+    $(document).ready(function(){
 
-    $('.toggle-checkbox').on('change', function () {
+        $('.toggle-checkbox').on('change', function () {
 
-        let checkbox = $(this);
-        let originalState = !checkbox.prop('checked'); 
-        let blogger_id = checkbox.data('user_id');
+            let checkbox = $(this);
+            let originalState = !checkbox.prop('checked'); 
+            let blogger_id = checkbox.data('user_id');
 
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You want to change the status of this Blogger!",
-            showCancelButton: true,
-            confirmButtonColor: '#C97C5D',
-            cancelButtonColor: '#4A4A4A',
-            confirmButtonText: 'Yes'
-        }).then((result) => {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You want to change the status of this Blogger!",
+                showCancelButton: true,
+                confirmButtonColor: '#C97C5D',
+                cancelButtonColor: '#4A4A4A',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
 
-            if (result.isConfirmed) {
+                if (result.isConfirmed) {
 
-                $('#loader').addClass('active');
+                    $('#loader').addClass('active');
 
-                $.ajax({
-                    url: "{{url('blogsphere/manage-bloggers/update-bloggers-status')}}/" + blogger_id,
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function (response) {
-
-                        $('#loader').removeClass('active');
-
-                        if (response.status === true) {
-                            toastr.success(response.message);
-                            location.reload();
-                        }
-                    },
-                    error: function (error) {
-
-                        $('#loader').removeClass('active');
-
-                        let errMsg = 'Something went wrong';
-                        if (error.responseJSON && error.responseJSON.message) {
-                            errMsg = error.responseJSON.message;
-                        }
-                        toastr.error(errMsg);
-
-                        checkbox.prop('checked', originalState);
-                    }
-                });
-
-            } else {
-                checkbox.prop('checked', originalState);
-            }
-        });
-    });
-
-    $('.delete_blogger').on('click', function(e){
-        e.preventDefault();
-
-        let blogger_id = $(this).data('user_id');
-
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You want to delete this Blogger!",
-            showCancelButton: true,
-            confirmButtonColor: '#C97C5D',
-            cancelButtonColor: '#4A4A4A',
-            confirmButtonText: 'Yes'
-        }).then((result)=>{
-            if(result.isConfirmed){
-
-                $('#loader').addClass('active');
-
-                $.ajax({
-                    url: "{{url('blogsphere/manage-bloggers/delete-blogger')}}/" + blogger_id,
-                    type: 'GET',
-                    dataType: 'json',
-                    success:function(response){
-                        console.log(response);
-                        if(response.status == true){
-                            toastr.success(response.message);
+                    $.ajax({
+                        url: "{{url('blogsphere/manage-bloggers/update-bloggers-status')}}/" + blogger_id,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (response) {
 
                             $('#loader').removeClass('active');
 
-                            location.reload();
+                            if (response.status === true) {
+                                toastr.success(response.message);
+                                location.reload();
+                            }
+                        },
+                        error: function (error) {
+
+                            $('#loader').removeClass('active');
+
+                            let errMsg = 'Something went wrong';
+                            if (error.responseJSON && error.responseJSON.message) {
+                                errMsg = error.responseJSON.message;
+                            }
+                            toastr.error(errMsg);
+
+                            checkbox.prop('checked', originalState);
                         }
-                    },
-                    error:function(error){
-                        $('#loader').removeClass('active');
-                        let errMsg = 'Something went wrong';
-                        if(error.responseJSON && error.responseJSON.message){
-                            errMsg = error.responseJSON.message;
+                    });
+
+                } else {
+                    checkbox.prop('checked', originalState);
+                }
+            });
+        });
+
+        $('.delete_blogger').on('click', function(e){
+            e.preventDefault();
+
+            let blogger_id = $(this).data('user_id');
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You want to delete this Blogger!",
+                showCancelButton: true,
+                confirmButtonColor: '#C97C5D',
+                cancelButtonColor: '#4A4A4A',
+                confirmButtonText: 'Yes'
+            }).then((result)=>{
+                if(result.isConfirmed){
+
+                    $('#loader').addClass('active');
+
+                    $.ajax({
+                        url: "{{url('blogsphere/manage-bloggers/delete-blogger')}}/" + blogger_id,
+                        type: 'GET',
+                        dataType: 'json',
+                        success:function(response){
+                            console.log(response);
+                            if(response.status == true){
+                                toastr.success(response.message);
+
+                                $('#loader').removeClass('active');
+
+                                location.reload();
+                            }
+                        },
+                        error:function(error){
+                            $('#loader').removeClass('active');
+                            let errMsg = 'Something went wrong';
+                            if(error.responseJSON && error.responseJSON.message){
+                                errMsg = error.responseJSON.message;
+                            }
+                            toastr.error(errMsg);
                         }
-                        toastr.error(errMsg);
-                    }
-                })
-            }
+                    })
+                }
+            })
+
         })
 
-    })
+        $('.address_book').on('click', function(){
 
-});
+            let blogger_details = $(this).data('blogger');
+
+            let addressHtml = `
+                <div style="text-align:left;">
+                    <p><b>Address:</b> ${blogger_details.address}</p>
+                    <p><b>City:</b> ${blogger_details.cities.city_name}</p>
+                    <p><b>State:</b> ${blogger_details.states.state_name}</p>
+                </div>
+            `;
+            Swal.fire({
+                title: 'Blogger Address',
+                html: addressHtml,
+                confirmButtonColor: '#C97C5D'
+            });
+
+        });
+    });
 </script>
-
-
 @endsection

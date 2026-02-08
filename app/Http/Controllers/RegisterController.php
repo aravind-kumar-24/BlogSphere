@@ -78,9 +78,6 @@ class RegisterController extends Controller
             $encrypted_user_id = Crypt::encryptString($blogger->user_id);
             $url = url('email-verification/'.$encrypted_user_id);
 
-            //Only for testing
-            $blogger->email_id = 'aravindmpkas@gmail.com';
-
             try{
                 Mail::to($blogger->email_id)->send(new RegistrationCompletedMail($full_name, $url));
             }catch(\Exception $e){
@@ -90,7 +87,7 @@ class RegisterController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'Registration completed successfully!',
-                'redirect_url' => url('/blogger-login')
+                'redirect_url' => url('/')
             ]);
 
         }catch(\Exception $e){

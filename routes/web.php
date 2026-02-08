@@ -1,14 +1,11 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\BlogsController;
-    use App\Http\Controllers\HomeController;
+    use App\Http\Controllers\AdminController;
+    use App\Http\Controllers\BlogsController;
     use App\Http\Controllers\LoginController;
     use App\Http\Controllers\ProfileController;
     use App\Http\Controllers\RegisterController;
     use Illuminate\Support\Facades\Route;
-
-    Route::get('/', [HomeController::class, 'home']);
 
     Route::get('/blogger-register', [RegisterController::class, 'index']);
 
@@ -16,7 +13,7 @@ use App\Http\Controllers\BlogsController;
 
     Route::get('/get-cities/{state_id}', [RegisterController::class, 'get_cities']);
 
-    Route::get('/blogger-login', [LoginController::class, 'index']);
+    Route::get('/', [LoginController::class, 'index']);
 
     Route::post('/login', [LoginController::class, 'login']);
 
@@ -33,6 +30,8 @@ use App\Http\Controllers\BlogsController;
         Route::prefix('blogsphere')->group(function(){
 
             Route::middleware('is_blogger')->group(function(){
+
+                Route::get('/blogs', [BlogsController::class, 'all_blogs']);
 
                 Route::get('/create-blog/{type?}/{blog_id?}', [BlogsController::class, 'index']);
 
@@ -58,11 +57,9 @@ use App\Http\Controllers\BlogsController;
 
                 Route::get('/manage-blogs', [AdminController::class, 'manage_blogs']);
 
-                Route::get('/rejected-blogs', [AdminController::class, 'rejected_blogs']);
+                Route::get('/manage-blogs/reject-blog/{blog_id}', [AdminController::class, 'reject_blogs']);
 
             });
-
-            Route::get('/blogs', [BlogsController::class, 'all_blogs']);
 
             Route::get('/my-profile/{type}', [ProfileController::class, 'profile_page']);
 

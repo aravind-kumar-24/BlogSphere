@@ -77,9 +77,8 @@
                         }
                     },
                     error:function(error){
+                        $('#loader').removeClass('active');
                         if(error.status === 422){
-                            $('#loader').removeClass('active');
-                            
                             let errors = error.responseJSON.errors;
 
                             console.log(errors);
@@ -112,7 +111,4 @@
             })
         })
    </script>
-
-@include('includes.Footer')
-
 @endsection

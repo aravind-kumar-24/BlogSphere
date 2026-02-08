@@ -132,7 +132,7 @@
                     <input id="reset_button" type="reset" value="Reset"/>
                 </div>
                 <div class="bottom-section-02">
-                    Already have an account? <span><a href="{{url('blogger-login')}}">Log in...</a></span>
+                    Already have an account? <span><a href="{{url('/')}}">Log in...</a></span>
                 </div>
             </div>
         </form>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ChangePasswordRequest;
+use App\Http\Requests\ForgotPasswordRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Mail\ForgotPasswordMail;
 use App\Models\Bloggers;
@@ -165,7 +166,7 @@ class ProfileController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'Password changed successfully! Kindly log in...',
-                'redirect_url' => url('/blogger-login')
+                'redirect_url' => url('/')
             ]);
 
         }catch(Exception $e){
@@ -181,16 +182,9 @@ class ProfileController extends Controller
         return view('ForgotPasswordPage');
     }
 
-    public function forgot_password_mail(Request $request){
+    public function forgot_password_mail(ForgotPasswordRequest $request){
 
         try{
-            $request->validate([
-                'email_id' => 'required|email'
-            ], [
-                'email_id.required' => 'Email ID is required',
-                'email_id.email' => 'Please enter a valid Email Address'
-            ]);
-
             $email_id = $request->input('email_id');
 
             $blogger_existing_check = Bloggers::where('email_id', $email_id)->first();
@@ -225,7 +219,7 @@ class ProfileController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'Password generated successfully! Kindly check your email',
-                'redirect_url' => url('/blogger-login')
+                'redirect_url' => url('/')
             ]);
 
         }catch(Exception $e){

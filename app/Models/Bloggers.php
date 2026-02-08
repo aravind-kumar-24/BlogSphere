@@ -11,11 +11,11 @@ class Bloggers extends User
     protected $guarded = [];
 
     public function states(){
-        return $this->belongsTo(States::class);
+        return $this->belongsTo(States::class, 'state_id');
     }
 
     public function cities(){
-        return $this->belongsTo(Cities::class);
+        return $this->belongsTo(Cities::class, 'city_id');
     }
 
     public function blogs(){
