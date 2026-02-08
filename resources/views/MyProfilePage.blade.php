@@ -188,6 +188,4 @@
         })
     })
 </script>
-
-@include('includes.Footer')
 @endsection

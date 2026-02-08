@@ -64,12 +64,14 @@ class LoginController extends Controller
 
             $message = $user_type == '2' ? 'Blogger' : 'Admin';
 
+            $url = $user_type == '2' ? url('/blogsphere/blogs') : url('/blogsphere/manage-bloggers');
+
             if(Auth::attempt(['email_id' => $email_id, 'password' => $password ])){
                 $request->session()->regenerate();
                 return Response::json([
                     'status' => true,
                     'message' => $message. ' successfully logged in!',
-                    'redirect_url' => url('/blogsphere/blogs')
+                    'redirect_url' => $url
                 ],200);
             }else{
                 return Response::json([
@@ -101,7 +103,7 @@ class LoginController extends Controller
             return Response::json([
                 'status' => true,
                 'message' => $message.' logged out successfully!',
-                'redirect_url' => url('/blogger-login')
+                'redirect_url' => url('/')
             ],200);
 
         }catch(Exception $e){

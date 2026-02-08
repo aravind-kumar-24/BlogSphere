@@ -18,7 +18,7 @@
             <div class="bottom-section">
                 <div class="bottom-section-01">
                     <input id="submit_button" type="submit" value="Send"/>
-                    <a id="cancel_button" href="{{url('/blogger-login')}}">Cancel</a>
+                    <a id="cancel_button" href="{{url('/')}}">Cancel</a>
                 </div>
             </div>
         </form>
@@ -56,9 +56,8 @@
                         }
                     },
                     error:function(error){
+                        $('#loader').removeClass('active');
                         if(error.status === 422){
-
-                            $('#loader').removeClass('active');
                             
                             let errors = error.responseJSON.errors;
 

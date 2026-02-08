@@ -14,18 +14,6 @@
     cursor:pointer;
 }
 
-.header-section-02{
-    display: flex;
-    flex-direction: row;
-    gap: 60px;
-    font-size: 22px;
-    color: #4A4A4A;
-}
-
-.header-section-02 div{
-    cursor: pointer;
-}
-
 .header-section-03{
     display: flex;
     flex-direction: row;
@@ -37,23 +25,6 @@
 
 .header-section-03 div{
     cursor:pointer;
-}
-
-.header-login-button a{
-    text-decoration: none;
-    color: #C97C5D;
-}
-
-.header-register-button{
-    border: 2px solid #C97C5D;
-    padding: 5px 15px;
-    border-radius: 10px;
-    background-color: #C97C5D;
-}
-
-.header-register-button a{
-    color: #F5F1EE;
-    text-decoration: none;
 }
 
 .header-menu-options {
@@ -89,12 +60,12 @@
     display: block;
 }
 
-.published-blogs, .my-profile, .manage-blogs{
+.published-blogs, .my-profile{
     border-top: 1px solid #C97C5D;
     border-bottom: 1px solid #C97C5D;
 }
 
-.all-blogs, .manage-bloggers{
+.all-blogs, .manage-blogs{
     border-top: 1px solid #C97C5D;
 }
 
